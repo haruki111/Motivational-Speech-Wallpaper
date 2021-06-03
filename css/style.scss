@@ -1,0 +1,64 @@
+@charset "utf-8";
+/*======================
+#mixins
+======================*/
+//マップ型変数breakpointsを定義
+$breakpoints: (
+  //キー値//767px以下（スマホ）用の表示
+  "sm": "screen and (max-width: 767px)",
+  //1024px以下768以上（タブレット）用の表示
+  "tab": "screen and (min-width: 768px) and (max-width: 1024px)",
+  //1025px以上（PC）用の表示
+  "md": "screen and (min-width: 1025px)"
+) !default;
+
+//メディアクエリ用のmixinを定義。デフォ値はmd
+@mixin mq($breakpoint: md) {
+  //map-get(マップ型変数, キー)で値を取得
+  @media #{map-get($breakpoints, $breakpoint)} {
+    //この中をカスタムできる
+    @content;
+  }
+}
+/*======================
+  #font
+======================*/
+$font-family-default: "游ゴシック体", "Yu Gothic", "ヒラギノ角ゴ Pro",
+  "メイリオ", "MS Pゴシック", "MS PGothic", sans-serif; // 標準フォント
+$font-family-english: sans-serif;
+/*======================
+#common -全体に共通するスタイル
+======================*/
+img {
+  width: 100%;
+}
+
+#inner {
+  margin: 0 auto;
+  padding: 40px;
+  box-sizing: content-box;
+  height: max;
+  @include mq(tab) {
+    padding: 24px;
+  }
+  @include mq(sm) {
+    padding: 18px;
+  }
+}
+
+.motivationWrapper {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  margin-bottom: 24px;
+  .motivationText {
+    font-size: 24px;
+    font-weight: 700;
+    @include mq(sm) {
+      font-size: 18px;
+    }
+  }
+}
